@@ -1,0 +1,6 @@
+git+https://github.com/herbie/herbie@package-herbie
+git+https://github.com/herbie/google-pubsub-adapter@packaging
+asgiref==3.2.7
+Django==3.0.6
+pytz==2020.1
+sqlparse==0.3.1
