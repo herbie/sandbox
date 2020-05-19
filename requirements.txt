@@ -1,0 +1,8 @@
+asgiref==3.2.7
+Django==3.0.6
+git+https://github.com/herbie/herbie@package-herbie
+pkg-resources==0.0.0
+pytz==2020.1
+sqlparse==0.3.1
+kafka-python==1.4.7
+google-cloud-pubsub==1.1.0
