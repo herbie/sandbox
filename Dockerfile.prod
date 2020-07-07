@@ -1,0 +1,36 @@
+FROM python:3
+
+ENV PYTHONUNBUFFERED 1
+
+RUN mkdir -p /data/www/
+RUN mkdir /data/www/static
+RUN mkdir /data/www/media
+
+
+WORKDIR /data/www/
+
+
+# copy and install requirements
+COPY requirements.txt /data/www/
+RUN pip install -r requirements.txt --upgrade
+
+
+# copy herbie files
+COPY herbieapp /data/www/
+COPY manage.py /data/www/
+COPY herbie /data/www/
+COPY schema /data/www/
+
+
+# ----
+RUN chown -R www-data:www-data /data/www
+
+USER www-data
+
+
+# ----
+RUN chmod u+x ./.docker/entrypoint.sh
+
+ENTRYPOINT [".docker/entrypoint.sh"]
+
+CMD ["gunicorn", "herbie.wsgi:application", "--bind 0.0.0.0:8000"]
