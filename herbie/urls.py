@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from herbie import urls as herbie_urls
+from herbie_core import urls as herbie_urls
 
 
 admin.site.site_header = 'Herbie'

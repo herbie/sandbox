@@ -16,16 +16,16 @@ import environ
 env = environ.Env()
 
 # Business entity application label
-APP_LABEL = 'herbie'
+APP_LABEL = 'herbieapp'
 
 # Json schema package for validation of business objects
-SCHEMA_REGISTRY_PACKAGE = 'herbie_json_schema'
+SCHEMA_REGISTRY_PACKAGE = 'schema'
 
 # chunk size for exporting data
 DEFAULT_CHUNK_SIZE = 100
 
 # message_provider (e.g. kafka, google pubsub)
-MESSAGING_PROVIDER = 'google_pub_sub'
+MESSAGING_PROVIDER = 'google_pubsub'
 
 # Google Cloud Pub/Sub
 GCLOUD_PUBSUB_PROJECT_ID = env.str('GCLOUD_PUBSUB_PROJECT_ID', " ")
@@ -40,9 +40,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'herbie.apps.HerbieConfig',
+    'herbie_core.apps.HerbieCoreConfig',
+    'herbieapp.apps.HerbieAppConfig',
 ]
 # Application definition
 
@@ -116,7 +117,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'herbieapi.wsgi.application'
+WSGI_APPLICATION = 'herbie.wsgi.application'
 
 
 # Database
