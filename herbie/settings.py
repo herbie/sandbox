@@ -24,6 +24,9 @@ SCHEMA_REGISTRY_PACKAGE = 'schema'
 # chunk size for exporting data
 DEFAULT_CHUNK_SIZE = 100
 
+# message_provider (e.g. kafka, google pubsub)
+MESSAGING_PROVIDER = 'google_pubsub'
+
 # Google Cloud Pub/Sub
 GCLOUD_PUBSUB_PROJECT_ID = env.str('GCLOUD_PUBSUB_PROJECT_ID', " ")
 
@@ -43,17 +46,16 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'herbie_core.apps.HerbieCoreConfig',
     'herbieapp.apps.HerbieAppConfig',
-    'google_pubsub_adapter.apps.HerbieGooglePubsubAdapterConfig',
-    'django.contrib.admin',
-    'rest_framework',
-    'rest_framework.authtoken'
 ]
 # Application definition
 
@@ -69,6 +71,21 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'herbie.urls'
+
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'herbieapp.authentication.social_authentication.process_roles'
+)
 
 
 AUTHENTICATION_BACKENDS = (
@@ -129,7 +146,11 @@ LOGGING = {
         '': {
             'level': 'DEBUG',
             'handlers': ['console']
-        }
+        },
+        'kafka': {
+            'handlers': ['console'],
+            'level': 'WARNING'
+        },
     }
 }
 
@@ -184,4 +205,9 @@ JSON_VIEWER = {
 HERBIE_ADMIN = {
     'JS_URL': 'js/herbie-admin.js',
     'CSS_URL': 'css/herbie-admin.css',
+}
+
+KAFKA = {
+    'SERVERS': 'herbie-kafka:9093',
+    'TIMEOUT': 30000
 }
