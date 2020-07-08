@@ -42,6 +42,12 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ENV_PATH = os.path.join(BASE_DIR, '.env')
+
+if os.path.exists(ENV_PATH):
+    env.read_env(ENV_PATH)
+
+
 ALLOWED_HOSTS = ['*']
 
 
