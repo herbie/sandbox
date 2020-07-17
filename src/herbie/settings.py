@@ -52,16 +52,17 @@ ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
     'herbie_core.apps.HerbieCoreConfig',
     'herbieapp.apps.HerbieAppConfig',
+    'google_pubsub_adapter.apps.HerbieGooglePubsubAdapterConfig',
+    'django.contrib.admin',
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 # Application definition
 
