@@ -2,6 +2,8 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED 1
 
+WORKDIR /data/www/
+
 
 # create folder structure
 RUN mkdir -p /data/www/
@@ -11,9 +13,6 @@ RUN mkdir -p /data/www/
 RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
-
-
-WORKDIR /data/www/
 
 
 # copy and install requirements

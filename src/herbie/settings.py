@@ -91,7 +91,7 @@ SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'src/herbie/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'herbie/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -193,9 +193,4 @@ JSON_VIEWER = {
 HERBIE_ADMIN = {
     'JS_URL': 'js/herbie-admin.js',
     'CSS_URL': 'css/herbie-admin.css',
-}
-
-KAFKA = {
-    'SERVERS': 'herbie-kafka:9093',
-    'TIMEOUT': 30000
 }
