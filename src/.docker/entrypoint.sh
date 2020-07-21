@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+set -o errexit
+set -o nounset
 
 wait_for_db_connection() {
     # make sure pg is ready to accept connections

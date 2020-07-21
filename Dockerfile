@@ -26,6 +26,9 @@ COPY src /data/www/
 # setup entrypoint
 RUN chmod u+x .docker/entrypoint.sh
 
+EXPOSE 8000
+
 ENTRYPOINT [".docker/entrypoint.sh"]
 
-CMD ["gunicorn", "herbie.wsgi:application", "--bind 0.0.0.0:8000"]
+CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:8000"]
+

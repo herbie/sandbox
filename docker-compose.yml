@@ -12,13 +12,11 @@ services:
     environment:
       - 'DATABASE_URL=postgres://user:password@herbie-db:5432/herbie_db'
       - 'SECRET_KEY=thisisasecret'
-    ports:
-      - '8000'
     networks:
       - 'herbie-network'
 
   herbie-nginx:
-    image: 'nginx:1.17'
+    image: 'nginx:latest'
     container_name: 'herbie-nginx'
     volumes:
       - './nginx/default.conf:/etc/nginx/conf.d/default.conf'
@@ -26,7 +24,7 @@ services:
       - 'herbie-db'
       - 'herbie'
     ports:
-      - "80:80"
+      - "8000:8000"
     networks:
       - 'herbie-network'
 

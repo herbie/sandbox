@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'herbie_core.apps.HerbieCoreConfig',
     'herbieapp.apps.HerbieAppConfig',
-    'google_pubsub_adapter.apps.HerbieGooglePubsubAdapterConfig',
     'django.contrib.admin',
     'rest_framework',
     'rest_framework.authtoken'
