@@ -8,15 +8,12 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     depends_on:
-      - 'herbie-google-pubsub'
       - 'herbie-db'
     environment:
       - 'DATABASE_URL=postgres://user:password@herbie-db:5432/herbie_db'
       - 'SECRET_KEY=thisisasecret'
-      - 'GCLOUD_PUBSUB_PROJECT_ID=herbie-app'
-      - 'PUBSUB_EMULATOR_HOST=herbie-google-pubsub:8085'
     ports:
-      - '8000'
+      - '80'
     networks:
       - 'herbie-network'
 
@@ -29,7 +26,7 @@ services:
       - 'herbie-db'
       - 'herbie'
     ports:
-      - '${NGINX_PORT}:8000'
+      - '${NGINX_PORT}:80'
     networks:
       - 'herbie-network'
 
@@ -43,15 +40,7 @@ services:
       - 'POSTGRES_USER=user'
       - 'POSTGRES_PASSWORD=password'
     ports:
-      - '5433:5432'
-    networks:
-      - 'herbie-network'
-
-  herbie-google-pubsub:
-    container_name: 'herbie-google-pubsub'
-    image: 'knarz/pubsub-emulator'
-    ports:
-      - '8085:8085'
+      - '${POSTGRES_PORT}:5432'
     networks:
       - 'herbie-network'
 
