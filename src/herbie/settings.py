@@ -134,10 +134,6 @@ LOGGING = {
             'level': 'DEBUG',
             'handlers': ['console']
         },
-        'kafka': {
-            'handlers': ['console'],
-            'level': 'WARNING'
-        },
     }
 }
 

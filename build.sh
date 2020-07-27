@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-while [ -n "$1" ]; do # while loop starts
+while [ -n "$1" ]; do
 
     case "$1" in
 
-    --prod) PROD=true ;; # Message for -a option
+    --prod) PROD=true ;;
 
     -p) PROD=true ;;
 
-    *) echo "Option $1 not recognized" ;; # In case you typed a different option other than a,b,c
+    *) echo "Option $1 not recognized" ;;
 
     esac
 
