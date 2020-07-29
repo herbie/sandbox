@@ -39,6 +39,12 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ENV_PATH = os.path.join(BASE_DIR, '.env')
+
+if os.path.exists(ENV_PATH):
+    env.read_env(ENV_PATH)
+
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -50,7 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'herbie_core.apps.HerbieCoreConfig',
     'herbieapp.apps.HerbieAppConfig',
-    'google_pubsub_adapter.apps.HerbieGooglePubsubAdapterConfig',
     'django.contrib.admin',
     'rest_framework',
     'rest_framework.authtoken'
@@ -69,7 +74,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'herbie.urls'
-
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -129,7 +133,7 @@ LOGGING = {
         '': {
             'level': 'DEBUG',
             'handlers': ['console']
-        }
+        },
     }
 }
 

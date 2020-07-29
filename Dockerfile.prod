@@ -7,6 +7,8 @@ WORKDIR /data/www/
 
 # create folder structure
 RUN mkdir -p /data/www/
+RUN mkdir /data/www/static
+RUN mkdir /data/www/media
 
 
 # install pg client
@@ -17,17 +19,24 @@ RUN apt-get update && apt-get install -y \
 
 # copy and install requirements
 COPY src/requirements.txt /data/www/
+
 RUN pip install -r requirements.txt --upgrade
 
 
 # copy herbie files
 COPY src /data/www/
 
+
+# set permissions
+RUN chown -R www-data:www-data /data/www
+
+USER www-data
+
+
 # setup entrypoint
 RUN chmod u+x .docker/entrypoint.sh
 
-
 ENTRYPOINT [".docker/entrypoint.sh"]
 
-CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:80"]
 
+CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:80"]
