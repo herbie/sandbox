@@ -29,5 +29,5 @@ RUN chmod u+x .docker/entrypoint.sh
 
 ENTRYPOINT [".docker/entrypoint.sh"]
 
-CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:80"]
+CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:8000"]
 
