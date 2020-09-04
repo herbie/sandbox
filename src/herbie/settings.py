@@ -25,7 +25,13 @@ SCHEMA_REGISTRY_PACKAGE = 'schema'
 DEFAULT_CHUNK_SIZE = 100
 
 # Google Cloud Pub/Sub
-GCLOUD_PUBSUB_PROJECT_ID = env.str('GCLOUD_PUBSUB_PROJECT_ID', " ")
+GCLOUD_PUBSUB_PROJECT_ID = os.environ["GCLOUD_PUBSUB_PROJECT_ID"]
+
+# AWS SNS/SQS
+AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+AWS_SQS_SNS_REGION = os.environ["AWS_SQS_SNS_REGION"]
+AWS_SQS_SNS_ENDPOINT_URL = os.environ["AWS_SQS_SNS_ENDPOINT_URL"]
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,7 +43,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ENV_PATH = os.path.join(BASE_DIR, '.env')
 
@@ -58,7 +64,9 @@ INSTALLED_APPS = [
     'herbieapp.apps.HerbieAppConfig',
     'django.contrib.admin',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'google_pubsub_adapter.apps.HerbieGooglePubsubAdapterConfig',
+    'aws_sns_sqs_adapter.apps.HerbieAwsSnsSqsAdapterConfig',
 ]
 # Application definition
 
@@ -132,6 +140,15 @@ LOGGING = {
     'loggers': {
         '': {
             'level': 'DEBUG',
+            'handlers': ['console']
+        },
+        # Boto library is quite noisy logging on DEBUG
+        'botocore': {
+            'level': 'INFO',
+            'handlers': ['console']
+        },
+        'urllib3': {
+            'level': 'INFO',
             'handlers': ['console']
         },
     }

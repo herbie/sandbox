@@ -12,6 +12,12 @@ services:
     environment:
       - 'DATABASE_URL=postgres://user:password@herbie-db:5432/herbie_db'
       - 'SECRET_KEY=thisisasecret'
+      - 'GCLOUD_PUBSUB_PROJECT_ID=herbie-app'
+      - 'PUBSUB_EMULATOR_HOST=herbie-google-pub-sub:8085'
+      - 'AWS_ACCESS_KEY_ID=x'
+      - 'AWS_SECRET_ACCESS_KEY=x'
+      - 'AWS_SQS_SNS_REGION=local'
+      - 'AWS_SQS_SNS_ENDPOINT_URL=http://herbie-aws-sns-sqs:4100'
     ports:
       - '80'
     networks:
@@ -41,6 +47,22 @@ services:
       - 'POSTGRES_PASSWORD=password'
     ports:
       - '${POSTGRES_PORT}:5432'
+    networks:
+      - 'herbie-network'
+
+  herbie-google-pub-sub:
+    container_name: 'herbie-google-pub-sub'
+    image: 'knarz/pubsub-emulator'
+    ports:
+      - '8085:8085'
+    networks:
+      - 'herbie-network'
+
+  herbie-aws-sns-sqs:
+    container_name: 'herbie-aws-sns-sqs'
+    image: 'pafortin/goaws'
+    ports:
+      - '4100:4100'
     networks:
       - 'herbie-network'
 
