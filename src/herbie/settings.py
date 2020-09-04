@@ -60,7 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jet',
+    'jazzmin',
     'herbie_core.apps.HerbieCoreConfig',
     'herbieapp.apps.HerbieAppConfig',
     'django.contrib.admin',
