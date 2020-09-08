@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
+# update pip
+RUN /usr/local/bin/python -m pip install --upgrade pip
 
 # copy and install requirements
 COPY src/requirements.txt /data/www/
@@ -29,5 +31,6 @@ RUN chmod u+x .docker/entrypoint.sh
 
 ENTRYPOINT [".docker/entrypoint.sh"]
 
-CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:80"]
+## Using reload to auto-reload when code changes
+CMD ["gunicorn", "herbie.wsgi:application", "--bind", "0.0.0.0:80", "--reload"]
 
