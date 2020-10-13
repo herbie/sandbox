@@ -151,6 +151,10 @@ LOGGING = {
             'level': 'INFO',
             'handlers': ['console']
         },
+        'faker': {
+            'level': 'INFO',
+            'handlers': ['console']
+        },
     }
 }
 
